@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { LoginScreen } from './ui/LoginScreen';
+import { HomeScreen } from './ui/home/HomeScreen';
 
 ReactDOM.render(
   <React.StrictMode>
-    <LoginScreen />
+    <HomeScreen />
   </React.StrictMode>,
   document.getElementById('root')
 );
