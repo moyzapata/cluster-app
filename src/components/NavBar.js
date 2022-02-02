@@ -16,7 +16,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { mainListItems } from './List';
 
-const pages = ['Inicio', 'Empresas',];
+const pages = ['Inicio', 'Empresas'];
+const ref = ['/', '/empresas'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = () => {
@@ -80,9 +81,9 @@ const ResponsiveAppBar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((mainListItems) => (
-                <MenuItem key={mainListItems} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{mainListItems}</Typography>
+              {pages.map((pages) => (
+                <MenuItem key={pages} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{pages}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -96,13 +97,13 @@ const ResponsiveAppBar = () => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages.map((pages) => (
               <Button
-                key={page}
+                key={pages}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {mainListItems}
+                {pages}
               </Button>
             ))}
           </Box>
