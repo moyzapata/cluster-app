@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { HomeScreen } from './ui/home/HomeScreen';
+import { NavBarDrawer } from './components/NavBarDrawer';
 
 ReactDOM.render(
   <React.StrictMode>
-    <HomeScreen />
+    <NavBarDrawer />
   </React.StrictMode>,
   document.getElementById('root')
 );

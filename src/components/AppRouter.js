@@ -42,6 +42,6 @@ function Home() {
   return <h2>Home</h2>;
 }
 
-function About() {
+function Empresas() {
   return <h2>Empresas</h2>;
 }
