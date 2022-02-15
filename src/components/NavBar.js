@@ -7,7 +7,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'; 
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './List';
 import MailIcon from '@mui/icons-material/Mail';
@@ -16,6 +16,13 @@ import MenuItem from '@mui/material/MenuItem';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { AppBar, Drawer } from '@material-ui/core';
+import Popover from '@mui/material/Popover';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import { FixedSizeList } from 'react-window';
+import ListItemButton from '@mui/material/ListItemButton';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const drawerWidth = 240;
 const settings = ['Perfil', 'Cuenta', 'Cerrar sesión'];
@@ -46,6 +53,64 @@ export const Navbar = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
+  };
+
+  const [anchorNt, setAnchorNt] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorNt(anchorNt ? null : event.currentTarget);
+  };
+
+  const handleCloseNt = () => {
+    setAnchorNt(null);
+  };
+
+  const openNt = Boolean(anchorNt);
+  const id = openNt ? 'simple-popper' : undefined;
+
+  function renderRow(props) {
+    const { index, style } = props;
+
+    return (
+      <ListItem style={style} key={index} component="div" disablePadding>
+        <ListItemButton>
+          <ListItemText primary={`Item ${index + 1}`} />
+        </ListItemButton>
+      </ListItem>
+    );
+  }
+
+  const [anchorMail, setAnchorMail] = React.useState(null);
+
+  const handleClickMail = (event) => {
+    setAnchorMail(anchorMail ? null : event.currentTarget);
+  };
+
+  const handleCloseMail = () => {
+    setAnchorMail(null);
+  };
+
+  const openMail = Boolean(anchorMail);
+  const idMail = openMail ? 'simple-popper' : undefined;
+
+  function renderRowMail(props) {
+    const { index, style } = props;
+
+    return (
+      <ListItem style={style} key={index} component="div" disablePadding>
+        <ListItemButton>
+          <ListItemText primary={`Item ${index + 1}`} />
+        </ListItemButton>
+      </ListItem>
+    );
+  }
+
+  const [openBd, setOpenBd] = React.useState(false);
+  const handleCloseBd = () => {
+    setOpenBd(false);
+  };
+  const handleToggleBd = () => {
+    setOpenBd(!openBd);
   };
 
   const menuId = 'primary-search-account-menu';
@@ -91,15 +156,18 @@ export const Navbar = () => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+      <MenuItem aria-describedby={idMail} onClick={handleClickMail}>
+        <IconButton size="large"
+          aria-label="show 4 new mails"
+          color="inherit"
+        >
           <Badge badgeContent={1} color="error">
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem aria-describedby={id} onClick={handleClick}>
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
@@ -157,20 +225,82 @@ export const Navbar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            <IconButton size="large"
+              aria-label="show 4 new mails"
+              color="inherit"
+              aria-describedby={idMail}
+              onClick={handleClickMail}>
               <Badge badgeContent={1} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>
+            <Popover
+              id={idMail}
+              open={openMail}
+              anchorEl={anchorMail}
+              onClose={handleCloseMail}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+            >
+              <Box
+                sx={{ width: '100%', height: 400, maxWidth: 360, bgcolor: 'background.paper' }}
+              >
+                <FixedSizeList
+                  height={400}
+                  width={360}
+                  itemSize={46}
+                  itemCount={1}
+                  overscanCount={5}
+                >
+                  {renderRowMail}
+                </FixedSizeList>
+              </Box>
+            </Popover>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
+              aria-describedby={id}
+              onClick={handleClick}
             >
               <Badge badgeContent={1} color="error">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
+            <Popover
+              id={id}
+              open={openNt}
+              anchorEl={anchorNt}
+              onClose={handleCloseNt}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+            >
+              <Box
+                sx={{ width: '100%', height: 400, maxWidth: 360, bgcolor: 'background.paper' }}
+              >
+                <FixedSizeList
+                  height={400}
+                  width={360}
+                  itemSize={46}
+                  itemCount={8}
+                  overscanCount={5}
+                >
+                  {renderRow}
+                </FixedSizeList>
+              </Box>
+            </Popover>
             <IconButton
               size="large"
               edge="end"
@@ -199,6 +329,13 @@ export const Navbar = () => {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={openBd}
+        onClick={handleCloseBd}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Drawer open={open}>
         <Toolbar
           sx={{

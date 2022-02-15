@@ -9,9 +9,14 @@ import { LoginScreen } from "./login/LoginScreen";
 function App() {
     return (
         <BrowserRouter>
+        <Navbar />
             <Routes>
                 <Route exact path="/login" element={<LoginScreen />} />
-                <Route element={DefaultContainer} />
+                <Route path="/" element={<HomeScreen />} />
+                <Route path="/empresas" element={<EmpresaScreen />} />
+                <Route path="/pendientes" element={<Pendientes />} />
+                <Route path="/inventario" element={<Inventario />} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
     )
