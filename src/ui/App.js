@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { Navbar } from "../components/NavBar";
 import { NavBarDrawer } from "../components/NavBarDrawer";
 import { EmpresaScreen } from "./empresa/EmpresaScreen";
@@ -8,32 +8,23 @@ import { LoginScreen } from "./login/LoginScreen";
 
 function App() {
     return (
-        <BrowserRouter>
-        <Navbar />
-            <Routes>
-                <Route exact path="/login" element={<LoginScreen />} />
-                <Route path="/" element={<HomeScreen />} />
-                <Route path="/empresas" element={<EmpresaScreen />} />
-                <Route path="/pendientes" element={<Pendientes />} />
-                <Route path="/inventario" element={<Inventario />} />
-                <Route path="*" element={<NotFound />} />
-            </Routes>
-        </BrowserRouter>
+        <div>
+            <BrowserRouter>
+                {/* {location.pathname !== '/login' && <Navbar />} */}
+                <Routes>
+                    <Route exact path="/login" element={<LoginScreen />} />
+                    <Route path="/" element={<HomeScreen />} />
+                    <Route path="/empresas" element={<EmpresaScreen />} />
+                    <Route path="/pendientes" element={<Pendientes />} />
+                    <Route path="/inventario" element={<Inventario />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </BrowserRouter>
+        </div>
     )
 }
 
 export default App;
-
-const DefaultContainer = () => (
-    <div>
-        <Navbar />
-        <Route path="/" element={<HomeScreen />} />
-        <Route path="/empresas" element={<EmpresaScreen />} />
-        <Route path="/pendientes" element={<Pendientes />} />
-        <Route path="/inventario" element={<Inventario />} />
-        <Route path="*" element={<NotFound />} />
-    </div>
-)
 
 function Pendientes() {
     return <h1>Pendientes vista</h1>

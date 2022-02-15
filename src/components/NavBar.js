@@ -21,8 +21,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { FixedSizeList } from 'react-window';
 import ListItemButton from '@mui/material/ListItemButton';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
 
 const drawerWidth = 240;
 const settings = ['Perfil', 'Cuenta', 'Cerrar sesión'];
@@ -104,14 +102,6 @@ export const Navbar = () => {
       </ListItem>
     );
   }
-
-  const [openBd, setOpenBd] = React.useState(false);
-  const handleCloseBd = () => {
-    setOpenBd(false);
-  };
-  const handleToggleBd = () => {
-    setOpenBd(!openBd);
-  };
 
   const menuId = 'primary-search-account-menu';
   const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -241,7 +231,7 @@ export const Navbar = () => {
               onClose={handleCloseMail}
               anchorOrigin={{
                 vertical: 'bottom',
-                horizontal: 'left',
+                horizontal: 'center',
               }}
               transformOrigin={{
                 vertical: 'top',
@@ -280,7 +270,7 @@ export const Navbar = () => {
               onClose={handleCloseNt}
               anchorOrigin={{
                 vertical: 'bottom',
-                horizontal: 'left',
+                horizontal: 'center',
               }}
               transformOrigin={{
                 vertical: 'top',
@@ -329,13 +319,6 @@ export const Navbar = () => {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={openBd}
-        onClick={handleCloseBd}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
       <Drawer open={open}>
         <Toolbar
           sx={{

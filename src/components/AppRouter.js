@@ -1,47 +1,19 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import { EmpresaScreen } from "../ui/empresa/EmpresaScreen";
+import { Route, Routes, Redirect, BrowserRouter } from "react-router-dom";
+import * as React from 'react';
 import { HomeScreen } from "../ui/home/HomeScreen";
+import { LoginScreen } from "../ui/login/LoginScreen";
+import { EmpresaScreen } from "../ui/empresa/EmpresaScreen";
+import { NotFound } from "../ui/Errors/NotFound";
 
-export default function App() {
-  return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/empresas">Empresas</Link>
-            </li>
-          </ul>
-        </nav>
+export const AppRouter = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<HomeScreen />} />
+      <Route path="/login" element={<LoginScreen />} />
+      <Route path="/empresas" element={<EmpresaScreen />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  </BrowserRouter>
+)
 
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/empresas">
-            <EmpresaScreen />
-          </Route>
-          <Route path="/">
-            <HomeScreen />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-  );
-}
-
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function Empresas() {
-  return <h2>Empresas</h2>;
-}
+export default Routes;
