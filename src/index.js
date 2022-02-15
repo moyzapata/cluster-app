@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { NavBarDrawer } from './components/NavBarDrawer';
+import { Navbar } from './components/NavBar';
+import App from './ui/App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <NavBarDrawer />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

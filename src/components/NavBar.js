@@ -153,7 +153,7 @@ export const Navbar = () => {
             noWrap
             sx={{ flexGrow: 1 }}
           >
-            Cluster
+            LOGO
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
