@@ -21,8 +21,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { FixedSizeList } from 'react-window';
 import ListItemButton from '@mui/material/ListItemButton';
+import { Outlet } from 'react-router-dom';
 
-const drawerWidth = 240;
 const settings = ['Perfil', 'Cuenta', 'Cerrar sesión'];
 
 export const Navbar = () => {
@@ -49,6 +49,11 @@ export const Navbar = () => {
   };
 
   const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+  const goMenuProfile = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
@@ -123,7 +128,7 @@ export const Navbar = () => {
       onClose={handleMenuClose}
     >
       {settings.map((setting) => (
-        <MenuItem key={setting} onClick={handleMenuClose}>
+        <MenuItem key={setting} onClick={goMenuProfile}>
           <Typography textAlign="center">{setting}</Typography>
         </MenuItem>
       ))}
@@ -319,6 +324,7 @@ export const Navbar = () => {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+      <Outlet />
       <Drawer open={open}>
         <Toolbar
           sx={{
