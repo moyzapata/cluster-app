@@ -21,11 +21,13 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { FixedSizeList } from 'react-window';
 import ListItemButton from '@mui/material/ListItemButton';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 const settings = ['Perfil', 'Cuenta', 'Cerrar sesión'];
 
 export const Navbar = () => {
+  let navigate = useNavigate();
+  
   const [open, setOpen] = React.useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const toggleDrawer = () => {
@@ -53,9 +55,24 @@ export const Navbar = () => {
     handleMobileMenuClose();
   };
 
-  const goMenuProfile = () => {
+  const goMenuProfile = (select) => {
     setAnchorEl(null);
     handleMobileMenuClose();
+    console.log(select);
+    switch(select){
+      case 'Perfil':
+        return goToLogin();
+      case 'Cuenta':
+        return goToLogin();
+      case 'Cerrar sesión':
+        return goToLogin();
+      default:
+        return goToLogin();
+    }
+  };
+
+  function goToLogin() {
+    navigate("/login")
   };
 
   const [anchorNt, setAnchorNt] = React.useState(null);
@@ -128,7 +145,7 @@ export const Navbar = () => {
       onClose={handleMenuClose}
     >
       {settings.map((setting) => (
-        <MenuItem key={setting} onClick={goMenuProfile}>
+        <MenuItem key={setting} onClick={() => goMenuProfile(setting)}>
           <Typography textAlign="center">{setting}</Typography>
         </MenuItem>
       ))}

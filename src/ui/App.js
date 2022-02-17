@@ -5,6 +5,7 @@ import { EmpresaScreen } from "./empresa/EmpresaScreen";
 import { NotFound } from "./Errors/NotFound";
 import { HomeScreen } from "./home/HomeScreen";
 import { LoginScreen } from "./login/LoginScreen";
+import SignUp from "./sing-up/SignUp";
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/login" element={<LoginScreen />} />
+                    <Route path="/register" element={<SignUp />} />
                     <Route path="/" element={<Navbar />}>
                         <Route index element={<HomeScreen />} />
                         <Route path="/empresas" element={<EmpresaScreen />} />
