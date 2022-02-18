@@ -20,6 +20,13 @@ import MenuItem from '@mui/material/MenuItem';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { HomeScreen } from '../ui/home/HomeScreen';
+import { BrowserRouter, Outlet, Route, Routes, useNavigate } from 'react-router-dom';
+import { ListItem, ListItemButton, ListItemText, Popover } from '@mui/material';
+import { FixedSizeList } from 'react-window';
+import { LoginScreen } from '../ui/login/LoginScreen';
+import { EmpresaScreen } from "../ui/empresa/EmpresaScreen";
+import { NotFound } from "../ui/Errors/NotFound";
+import SignUp from '../ui/sing-up/SignUp';
 
 const drawerWidth = 240;
 const settings = ['Perfil', 'Cuenta', 'Cerrar sesión'];
@@ -71,7 +78,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 export const NavBarDrawer = () => {
-  const [open, setOpen] = React.useState(true);
+  let navigate = useNavigate();
+
+  const [open, setOpen] = React.useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -98,6 +107,76 @@ export const NavBarDrawer = () => {
     handleMobileMenuClose();
   };
 
+  const goMenuProfile = (select) => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+    console.log(select);
+    switch (select) {
+      case 'Perfil':
+        return goToLogin();
+      case 'Cuenta':
+        return goToLogin();
+      case 'Cerrar sesión':
+        return goToLogin();
+      default:
+        return goToLogin();
+    }
+  };
+
+  function goToLogin() {
+    navigate("/login")
+  };
+
+  const [anchorNt, setAnchorNt] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorNt(anchorNt ? null : event.currentTarget);
+  };
+
+  const handleCloseNt = () => {
+    setAnchorNt(null);
+  };
+
+  const openNt = Boolean(anchorNt);
+  const id = openNt ? 'simple-popper' : undefined;
+
+  function renderRow(props) {
+    const { index, style } = props;
+
+    return (
+      <ListItem style={style} key={index} component="div" disablePadding>
+        <ListItemButton>
+          <ListItemText primary={`Item ${index + 1}`} />
+        </ListItemButton>
+      </ListItem>
+    );
+  }
+
+  const [anchorMail, setAnchorMail] = React.useState(null);
+
+  const handleClickMail = (event) => {
+    setAnchorMail(anchorMail ? null : event.currentTarget);
+  };
+
+  const handleCloseMail = () => {
+    setAnchorMail(null);
+  };
+
+  const openMail = Boolean(anchorMail);
+  const idMail = openMail ? 'simple-popper' : undefined;
+
+  function renderRowMail(props) {
+    const { index, style } = props;
+
+    return (
+      <ListItem style={style} key={index} component="div" disablePadding>
+        <ListItemButton>
+          <ListItemText primary={`Item ${index + 1}`} />
+        </ListItemButton>
+      </ListItem>
+    );
+  }
+
   const menuId = 'primary-search-account-menu';
   const mobileMenuId = 'primary-search-account-menu-mobile';
 
@@ -117,11 +196,11 @@ export const NavBarDrawer = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-    {settings.map((setting) => (
-      <MenuItem key={setting} onClick={handleMenuClose}>
-        <Typography textAlign="center">{setting}</Typography>
-      </MenuItem>
-    ))}
+      {settings.map((setting) => (
+        <MenuItem key={setting} onClick={() => goMenuProfile(setting)}>
+          <Typography textAlign="center">{setting}</Typography>
+        </MenuItem>
+      ))}
     </Menu>
   );
 
@@ -209,20 +288,84 @@ export const NavBarDrawer = () => {
             </Typography>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+              <IconButton
+                size="large"
+                aria-label="show 4 new mails"
+                color="inherit"
+                aria-describedby={idMail}
+                onClick={handleClickMail}
+              >
                 <Badge badgeContent={1} color="error">
                   <MailIcon />
                 </Badge>
               </IconButton>
+              <Popover
+                id={idMail}
+                open={openMail}
+                anchorEl={anchorMail}
+                onClose={handleCloseMail}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'center',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+              >
+                <Box
+                  sx={{ width: '100%', height: 400, maxWidth: 360, bgcolor: 'background.paper' }}
+                >
+                  <FixedSizeList
+                    height={400}
+                    width={360}
+                    itemSize={46}
+                    itemCount={1}
+                    overscanCount={5}
+                  >
+                    {renderRowMail}
+                  </FixedSizeList>
+                </Box>
+              </Popover>
               <IconButton
                 size="large"
                 aria-label="show 17 new notifications"
                 color="inherit"
+                aria-describedby={id}
+                onClick={handleClick}
               >
                 <Badge badgeContent={1} color="error">
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
+              <Popover
+                id={id}
+                open={openNt}
+                anchorEl={anchorNt}
+                onClose={handleCloseNt}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'center',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+              >
+                <Box
+                  sx={{ width: '100%', height: 400, maxWidth: 360, bgcolor: 'background.paper' }}
+                >
+                  <FixedSizeList
+                    height={400}
+                    width={360}
+                    itemSize={46}
+                    itemCount={8}
+                    overscanCount={5}
+                  >
+                    {renderRow}
+                  </FixedSizeList>
+                </Box>
+              </Popover>
               <IconButton
                 size="large"
                 edge="end"
@@ -282,7 +425,7 @@ export const NavBarDrawer = () => {
           }}
         >
           <Toolbar />
-          <HomeScreen />
+          <Outlet />
         </Box>
       </Box>
     </ThemeProvider>

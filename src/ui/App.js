@@ -14,7 +14,7 @@ function App() {
                 <Routes>
                     <Route path="/login" element={<LoginScreen />} />
                     <Route path="/register" element={<SignUp />} />
-                    <Route path="/" element={<Navbar />}>
+                    <Route path="/" element={<NavBarDrawer />}>
                         <Route index element={<HomeScreen />} />
                         <Route path="/empresas" element={<EmpresaScreen />} />
                         <Route path="/pendientes" element={<Pendientes />} />
