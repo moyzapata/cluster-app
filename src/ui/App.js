@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import { Navbar } from "../components/NavBar";
 import { NavBarDrawer } from "../components/NavBarDrawer";
 import { EmpresaScreen } from "./empresa/EmpresaScreen";
 import { NotFound } from "./Errors/NotFound";
