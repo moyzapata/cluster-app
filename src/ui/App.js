@@ -13,12 +13,12 @@ function App() {
                 <Routes>
                     <Route path="/login" element={<LoginScreen />} />
                     <Route path="/register" element={<SignUp />} />
+                    <Route path="*" element={<NotFound />} />
                     <Route path="/" element={<NavBarDrawer />}>
                         <Route index element={<HomeScreen />} />
                         <Route path="/empresas" element={<EmpresaScreen />} />
                         <Route path="/pendientes" element={<Pendientes />} />
                         <Route path="/inventario" element={<Inventario />} />
-                        <Route path="*" element={<NotFound />} />
                     </Route>
                 </Routes>
             </BrowserRouter>

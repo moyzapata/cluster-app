@@ -19,14 +19,9 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import { HomeScreen } from '../ui/home/HomeScreen';
-import { BrowserRouter, Outlet, Route, Routes, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { ListItem, ListItemButton, ListItemText, Popover } from '@mui/material';
 import { FixedSizeList } from 'react-window';
-import { LoginScreen } from '../ui/login/LoginScreen';
-import { EmpresaScreen } from "../ui/empresa/EmpresaScreen";
-import { NotFound } from "../ui/Errors/NotFound";
-import SignUp from '../ui/sing-up/SignUp';
 
 const drawerWidth = 240;
 const settings = ['Perfil', 'Cuenta', 'Cerrar sesión'];
@@ -220,7 +215,7 @@ export const NavBarDrawer = () => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      <MenuItem aria-describedby={idMail} onClick={handleClickMail}>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={1} color="error">
             <MailIcon />
@@ -228,7 +223,7 @@ export const NavBarDrawer = () => {
         </IconButton>
         <p>Messages</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem aria-describedby={id} onClick={handleClick}>
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
@@ -314,7 +309,7 @@ export const NavBarDrawer = () => {
                 }}
               >
                 <Box
-                  sx={{ width: '100%', height: 400, maxWidth: 360, bgcolor: 'background.paper' }}
+                  sx={{ width: '100%', height: 400, maxWidth: 300, bgcolor: 'background.paper' }}
                 >
                   <FixedSizeList
                     height={400}
@@ -353,7 +348,7 @@ export const NavBarDrawer = () => {
                 }}
               >
                 <Box
-                  sx={{ width: '100%', height: 400, maxWidth: 360, bgcolor: 'background.paper' }}
+                  sx={{ width: '100%', height: 400, maxWidth: 300, bgcolor: 'background.paper' }}
                 >
                   <FixedSizeList
                     height={400}
