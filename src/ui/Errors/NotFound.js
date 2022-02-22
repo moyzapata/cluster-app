@@ -4,9 +4,9 @@ import nps from './nps.png';
 export const NotFound = () => {
     return (
         <>
-            <img width={150} src={nps} />
+            <img width={300} src={nps} />
             <CardContent>
-                <Typography va riant="body2" color="text.secondary" sx="bool">
+                <Typography variant="h4" sx="bool">
                     Error 404
                 </Typography>
             </CardContent>
