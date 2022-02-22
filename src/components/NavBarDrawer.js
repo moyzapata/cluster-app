@@ -22,6 +22,8 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { ListItem, ListItemButton, ListItemText, Popover } from '@mui/material';
 import { FixedSizeList } from 'react-window';
+import useAuth from '../ui/App';
+import logo from "../assets/logoclus.png"
 
 const drawerWidth = 240;
 const settings = ['Perfil', 'Cuenta', 'Cerrar sesión'];
@@ -74,6 +76,7 @@ const mdTheme = createTheme();
 
 export const NavBarDrawer = () => {
   let navigate = useNavigate();
+  let auth = useAuth();
 
   const [open, setOpen] = React.useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -119,7 +122,13 @@ export const NavBarDrawer = () => {
   };
 
   function goToLogin() {
-    navigate("/login")
+    auth.signout(
+      navigate("/login")
+    );
+  };
+
+  function goToHome() {
+    navigate("/")
   };
 
   const [anchorNt, setAnchorNt] = React.useState(null);
@@ -254,7 +263,7 @@ export const NavBarDrawer = () => {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <AppBar position="absolute" open={open} >
           <Toolbar
             sx={{
               pr: '24px',
@@ -272,7 +281,8 @@ export const NavBarDrawer = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography
+            <img width={120} src={logo} />
+            {/*             <Typography
               component="h1"
               variant="h6"
               color="inherit"
@@ -280,7 +290,7 @@ export const NavBarDrawer = () => {
               sx={{ flexGrow: 1 }}
             >
               Cluster
-            </Typography>
+            </Typography> */}
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               <IconButton

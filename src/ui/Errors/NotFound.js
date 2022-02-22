@@ -1,5 +1,5 @@
-import { Card, CardContent, CardMedia, Container, Typography } from "@mui/material"
-import nps from './nps.png';
+import { CardContent, Typography } from "@mui/material"
+import nps from "../../assets/nps.png"
 
 export const NotFound = () => {
     return (

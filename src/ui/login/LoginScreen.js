@@ -12,14 +12,19 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useLocation, useNavigate } from 'react-router-dom';
+import {
+  useNavigate,
+  useLocation,
+  Navigate,
+} from 'react-router-dom';
+import { fakeAuthProvider } from '../../core/Auth';
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="http://www.ciat.mx/portal/index.php">
+        CIAT
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -27,11 +32,53 @@ function Copyright(props) {
   );
 }
 
+let AuthContext = React.createContext(null);
+
+export function AuthProvider(_a) {
+  var children = _a.children;
+  var _b = React.useState(null), user = _b[0], setUser = _b[1];
+
+  var signin = function (newUser, callback) {
+    return fakeAuthProvider.signin(function () {
+      setUser(newUser);
+      callback();
+    });
+  };
+
+  var signout = function (callback) {
+    return fakeAuthProvider.signout(function () {
+      setUser(null);
+      callback();
+    });
+  };
+
+  var value = { user: user, signin: signin, signout: signout };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+export function useAuth() {
+  return React.useContext(AuthContext);
+}
+
+export function RequireAuth(_a) {
+  var children = _a.children;
+  var auth = useAuth();
+  let location = useLocation();
+
+  if (!auth.user) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  return children;
+}
+
 const theme = createTheme();
 
 export const LoginScreen = () => {
   let navigate = useNavigate();
   let location = useLocation();
+  let auth = useAuth();
 
   let from = location.state?.from?.pathname || "/";
 
@@ -39,10 +86,14 @@ export const LoginScreen = () => {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
+    let email = data.get("email");
 
     console.log({
       email: data.get('email'),
       password: data.get('password'),
+    });
+    auth.signin(email, () => {
+      navigate(from, { replace: true });
     });
   };
 
