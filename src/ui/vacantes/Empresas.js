@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -19,9 +18,7 @@ import { visuallyHidden } from '@mui/utils';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ClearIcon from '@mui/icons-material/Clear';
 import SearchIcon from '@mui/icons-material/Search';
-import { useDemoData } from '@mui/x-data-grid-generator';
-import { Container, CssBaseline, RadioGroup, TextField } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
+import { TextField, Container, CssBaseline } from '@mui/material';
 
 const theme = createTheme();
 
@@ -40,16 +37,16 @@ function createData(name, address, nameContact, mailContact, site) {
 }
 
 const rows = [
-/*     createData('Cluster', "conicido", "Ricardo Orellana", "orellana@ciat.com.mx", "http://www.ciat.mx/portal/index.php"),
-    createData('Cluster', "conicido", "Ricardo Orellana", "orellana@ciat.com.mx", "http://www.ciat.mx/portal/index.php"),
-    createData('Cluster', "conicido", "Ricardo Orellana", "orellana@ciat.com.mx", "http://www.ciat.mx/portal/index.php"),
-    createData('Cluster', "conicido", "Ricardo Orellana", "orellana@ciat.com.mx", "http://www.ciat.mx/portal/index.php"),
-    createData('ATI', "conicido", "Ricardo Fernandez", "ricardofer@tecnologiaintegrada.com.mx", "https://tecnologiaintegrada.com.mx/"),
-    createData('ATI', "conicido", "Ricardo Fernandez", "ricardofer@tecnologiaintegrada.com.mx", "https://tecnologiaintegrada.com.mx/"),
-    createData('ATI', "conicido", "Ricardo Fernandez", "ricardofer@tecnologiaintegrada.com.mx", "https://tecnologiaintegrada.com.mx/"),
-    createData('ATI', "conicido", "Ricardo Fernandez", "ricardofer@tecnologiaintegrada.com.mx", "https://tecnologiaintegrada.com.mx/"),
-    createData('ATI', "conicido", "Ricardo Fernandez", "ricardofer@tecnologiaintegrada.com.mx", "https://tecnologiaintegrada.com.mx/"),
-    createData('ATI', "conicido", "Ricardo Fernandez", "ricardofer@tecnologiaintegrada.com.mx", "https://tecnologiaintegrada.com.mx/"), */
+    /*     createData('Cluster', "conicido", "Ricardo Orellana", "orellana@ciat.com.mx", "http://www.ciat.mx/portal/index.php"),
+        createData('Cluster', "conicido", "Ricardo Orellana", "orellana@ciat.com.mx", "http://www.ciat.mx/portal/index.php"),
+        createData('Cluster', "conicido", "Ricardo Orellana", "orellana@ciat.com.mx", "http://www.ciat.mx/portal/index.php"),
+        createData('Cluster', "conicido", "Ricardo Orellana", "orellana@ciat.com.mx", "http://www.ciat.mx/portal/index.php"),
+        createData('ATI', "conicido", "Ricardo Fernandez", "ricardofer@tecnologiaintegrada.com.mx", "https://tecnologiaintegrada.com.mx/"),
+        createData('ATI', "conicido", "Ricardo Fernandez", "ricardofer@tecnologiaintegrada.com.mx", "https://tecnologiaintegrada.com.mx/"),
+        createData('ATI', "conicido", "Ricardo Fernandez", "ricardofer@tecnologiaintegrada.com.mx", "https://tecnologiaintegrada.com.mx/"),
+        createData('ATI', "conicido", "Ricardo Fernandez", "ricardofer@tecnologiaintegrada.com.mx", "https://tecnologiaintegrada.com.mx/"),
+        createData('ATI', "conicido", "Ricardo Fernandez", "ricardofer@tecnologiaintegrada.com.mx", "https://tecnologiaintegrada.com.mx/"),
+        createData('ATI', "conicido", "Ricardo Fernandez", "ricardofer@tecnologiaintegrada.com.mx", "https://tecnologiaintegrada.com.mx/"), */
     { name: "Cluster", address: "conicido", nameContact: "Ricardo Orellana", mailContact: "orellana@ciat.com.mx", site: "http://www.ciat.mx/portal/index.php" },
     { name: "Cluster1", address: "conicido", nameContact: "Ricardo Orellana", mailContact: "orellana@ciat.com.mx", site: "http://www.ciat.mx/portal/index.php" },
     { name: "Cluster2", address: "conicido", nameContact: "Ricardo Orellana", mailContact: "orellana@ciat.com.mx", site: "http://www.ciat.mx/portal/index.php" },
@@ -302,103 +299,108 @@ export default function EnhancedTable() {
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
     return (
-        <Box sx={{ width: '100%' }}>
-            <Paper sx={{ width: '100%', mb: 2 }}>
-                <Toolbar
-                    sx={{
-                        pl: { sm: 2 },
-                        pr: { xs: 1, sm: 1 },
-                    }}
-                >
-                    <Typography
-                        sx={{ flex: '1 1 100%' }}
-                        variant="h6"
-                        id="tableTitle"
-                        component="div"
-                    >
-                        Empresas
-                    </Typography>
-                    <QuickSearchToolbar value={searchText}
-                        onChange={(event) => requestSearch(event.target.value)}
-                        clearSearch={() => requestSearch('')} />
-                </Toolbar>
-                <TableContainer>
-                    <Table
-                        sx={{ minWidth: 750 }}
-                        aria-labelledby="tableTitle"
-                        size={'medium'}
-                    >
-                        <EnhancedTableHead
-                            numSelected={selected.length}
-                            order={order}
-                            orderBy={orderBy}
-                            onSelectAllClick={handleSelectAllClick}
-                            onRequestSort={handleRequestSort}
-                            rowCount={setRowsSearch.length}
-                        />
-                        <TableBody>
-                            {rowsSearch.slice().sort(getComparator(order, orderBy))
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((row, index) => {
-                                    const isItemSelected = isSelected(row.name);
-                                    const labelId = `enhanced-table-checkbox-${index}`;
+        <ThemeProvider theme={theme}>
+            <Container component="main" maxWidth="lg">
+                <CssBaseline />
+                <Box sx={{ width: '100%' }}>
+                    <Paper sx={{ width: '100%', mb: 2 }}>
+                        <Toolbar
+                            sx={{
+                                pl: { sm: 2 },
+                                pr: { xs: 1, sm: 1 },
+                            }}
+                        >
+                            <Typography
+                                sx={{ flex: '1 1 100%' }}
+                                variant="h6"
+                                id="tableTitle"
+                                component="div"
+                            >
+                                Empresas
+                            </Typography>
+                            <QuickSearchToolbar value={searchText}
+                                onChange={(event) => requestSearch(event.target.value)}
+                                clearSearch={() => requestSearch('')} />
+                        </Toolbar>
+                        <TableContainer>
+                            <Table
+                                sx={{ minWidth: 750 }}
+                                aria-labelledby="tableTitle"
+                                size={'medium'}
+                            >
+                                <EnhancedTableHead
+                                    numSelected={selected.length}
+                                    order={order}
+                                    orderBy={orderBy}
+                                    onSelectAllClick={handleSelectAllClick}
+                                    onRequestSort={handleRequestSort}
+                                    rowCount={setRowsSearch.length}
+                                />
+                                <TableBody>
+                                    {rowsSearch.slice().sort(getComparator(order, orderBy))
+                                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                        .map((row, index) => {
+                                            const isItemSelected = isSelected(row.name);
+                                            const labelId = `enhanced-table-checkbox-${index}`;
 
-                                    return (
+                                            return (
+                                                <TableRow
+                                                    hover
+                                                    onClick={(event) => handleClick(event, row.name)}
+                                                    role="checkbox"
+                                                    aria-checked={isItemSelected}
+                                                    tabIndex={-1}
+                                                    key={row.name}
+                                                    selected={isItemSelected}
+                                                >
+                                                    <TableCell padding="checkbox">
+                                                        <Checkbox
+                                                            color="primary"
+                                                            checked={isItemSelected}
+                                                            inputProps={{
+                                                                'aria-labelledby': labelId,
+                                                            }}
+                                                        />
+                                                    </TableCell>
+                                                    <TableCell
+                                                        component="th"
+                                                        id={labelId}
+                                                        scope="row"
+                                                        padding="none"
+                                                    >
+                                                        {row.name}
+                                                    </TableCell>
+                                                    <TableCell align="right">{row.address}</TableCell>
+                                                    <TableCell align="right">{row.nameContact}</TableCell>
+                                                    <TableCell align="right">{row.mailContact}</TableCell>
+                                                    <TableCell align="right">{row.site}</TableCell>
+                                                </TableRow>
+                                            );
+                                        })}
+                                    {emptyRows > 0 && (
                                         <TableRow
-                                            hover
-                                            onClick={(event) => handleClick(event, row.name)}
-                                            role="checkbox"
-                                            aria-checked={isItemSelected}
-                                            tabIndex={-1}
-                                            key={row.name}
-                                            selected={isItemSelected}
+                                            style={{
+                                                height: (53) * emptyRows,
+                                            }}
                                         >
-                                            <TableCell padding="checkbox">
-                                                <Checkbox
-                                                    color="primary"
-                                                    checked={isItemSelected}
-                                                    inputProps={{
-                                                        'aria-labelledby': labelId,
-                                                    }}
-                                                />
-                                            </TableCell>
-                                            <TableCell
-                                                component="th"
-                                                id={labelId}
-                                                scope="row"
-                                                padding="none"
-                                            >
-                                                {row.name}
-                                            </TableCell>
-                                            <TableCell align="right">{row.address}</TableCell>
-                                            <TableCell align="right">{row.nameContact}</TableCell>
-                                            <TableCell align="right">{row.mailContact}</TableCell>
-                                            <TableCell align="right">{row.site}</TableCell>
+                                            <TableCell colSpan={6} />
                                         </TableRow>
-                                    );
-                                })}
-                            {emptyRows > 0 && (
-                                <TableRow
-                                    style={{
-                                        height: (53) * emptyRows,
-                                    }}
-                                >
-                                    <TableCell colSpan={6} />
-                                </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
-                    component="div"
-                    count={rows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-            </Paper>
-        </Box>
+                                    )}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        <TablePagination
+                            rowsPerPageOptions={[5, 10, 25]}
+                            component="div"
+                            count={rows.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            onPageChange={handleChangePage}
+                            onRowsPerPageChange={handleChangeRowsPerPage}
+                        />
+                    </Paper>
+                </Box>
+            </Container>
+        </ThemeProvider>
     );
 }
