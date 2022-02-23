@@ -3,6 +3,7 @@ import { NavBarDrawer } from "../components/NavBarDrawer";
 import { EmpresaScreen } from "./empresa/EmpresaScreen";
 import { NotFound } from "./Errors/NotFound";
 import { HomeScreen } from "./home/HomeScreen";
+import EmpresasList from "./vacantes/Empresas";
 import SignUp from "./sing-up/SignUp";
 import * as React from 'react';
 import { AuthProvider, LoginScreen } from "./login/LoginScreen";
@@ -17,6 +18,7 @@ function App() {
                     <Routes>
                         <Route path="/login" element={<LoginScreen />} />
                         <Route path="/register" element={<SignUp />} />
+                        <Route path="/elijeEmpresa" element={<EmpresasList />} />
                         <Route path="*" element={<NotFound />} />
                         <Route path="/solicitud" element={<Form />} />
                         <Route element={<NavBarDrawer />}>

@@ -13,10 +13,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { styled } from '@mui/material';
 import PropTypes from 'prop-types';
 import CircularProgress from '@mui/material/CircularProgress';
+import {
+    useNavigate,
+} from 'react-router-dom';
 
 const theme = createTheme();
 
 export default function Form() {
+    let navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -25,6 +29,7 @@ export default function Form() {
             email: data.get('email'),
             password: data.get('password'),
         });
+        navigate("/elijeEmpresa");
     };
 
     const Input = styled('input')({
@@ -126,7 +131,7 @@ export default function Form() {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Registrate
+                            Enviar
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
