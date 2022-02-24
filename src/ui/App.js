@@ -9,6 +9,8 @@ import * as React from 'react';
 import { AuthProvider, LoginScreen } from "./login/LoginScreen";
 import { RequireAuth } from "./login/LoginScreen";
 import Form from "./vacantes/Form";
+import FormBecarios from "./becarios/FormBecarios";
+import InventarioScreen from "./inventario/InventarioScreen";
 
 function App() {
     return (
@@ -21,6 +23,7 @@ function App() {
                         <Route path="/elijeEmpresa" element={<EmpresasList />} />
                         <Route path="*" element={<NotFound />} />
                         <Route path="/solicitud" element={<Form />} />
+                        <Route path="/formBecarios" element={<FormBecarios />} />
                         <Route element={<NavBarDrawer />}>
                             <Route path="/" element={<HomeScreen />} />
                             <Route path="/empresas" element={<EmpresaScreen />} />
@@ -28,7 +31,7 @@ function App() {
                                 path="/inventario"
                                 element={
                                     <RequireAuth>
-                                        <Inventario />
+                                        <InventarioScreen />
                                     </RequireAuth>
                                 }
                             />
@@ -52,8 +55,4 @@ export default App;
 
 function Pendientes() {
     return <h1>Pendientes vista</h1>
-}
-
-function Inventario() {
-    return <h1>Inventario vista</h1>
 }

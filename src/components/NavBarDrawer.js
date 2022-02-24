@@ -20,7 +20,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { ListItem, ListItemButton, ListItemText, Popover } from '@mui/material';
+import { CardMedia, ListItem, ListItemButton, ListItemText, Popover } from '@mui/material';
 import { FixedSizeList } from 'react-window';
 import useAuth from '../ui/App';
 import logo from "../assets/logoclus.png"
@@ -281,7 +281,9 @@ export const NavBarDrawer = () => {
             >
               <MenuIcon />
             </IconButton>
-            <img width={120} src={logo} />
+            <CardMedia>
+              <img width={120} src={logo} />
+            </CardMedia>
             {/*             <Typography
               component="h1"
               variant="h6"

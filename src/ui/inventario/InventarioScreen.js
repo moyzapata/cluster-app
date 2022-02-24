@@ -26,34 +26,23 @@ function escapeRegExp(value) {
     return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 }
 
-function createData(name, address, nameContact, mailContact, site) {
+function createData(name, description, model, status, code) {
     return {
         name,
-        address,
-        nameContact,
-        mailContact,
-        site,
+        description,
+        model,
+        status,
+        code,
     };
 }
 
 const rows = [
-    /*     createData('Cluster', "conicido", "Ricardo Orellana", "orellana@ciat.com.mx", "http://www.ciat.mx/portal/index.php"),
-        createData('Cluster', "conicido", "Ricardo Orellana", "orellana@ciat.com.mx", "http://www.ciat.mx/portal/index.php"),
-        createData('Cluster', "conicido", "Ricardo Orellana", "orellana@ciat.com.mx", "http://www.ciat.mx/portal/index.php"),
-        createData('Cluster', "conicido", "Ricardo Orellana", "orellana@ciat.com.mx", "http://www.ciat.mx/portal/index.php"),
-        createData('ATI', "conicido", "Ricardo Fernandez", "ricardofer@tecnologiaintegrada.com.mx", "https://tecnologiaintegrada.com.mx/"),
-        createData('ATI', "conicido", "Ricardo Fernandez", "ricardofer@tecnologiaintegrada.com.mx", "https://tecnologiaintegrada.com.mx/"),
-        createData('ATI', "conicido", "Ricardo Fernandez", "ricardofer@tecnologiaintegrada.com.mx", "https://tecnologiaintegrada.com.mx/"),
-        createData('ATI', "conicido", "Ricardo Fernandez", "ricardofer@tecnologiaintegrada.com.mx", "https://tecnologiaintegrada.com.mx/"),
-        createData('ATI', "conicido", "Ricardo Fernandez", "ricardofer@tecnologiaintegrada.com.mx", "https://tecnologiaintegrada.com.mx/"),
-        createData('ATI', "conicido", "Ricardo Fernandez", "ricardofer@tecnologiaintegrada.com.mx", "https://tecnologiaintegrada.com.mx/"), */
-    { name: "Cluster", address: "conicido", nameContact: "Ricardo Orellana", mailContact: "orellana@ciat.com.mx", site: "http://www.ciat.mx/portal/index.php" },
-    { name: "Cluster1", address: "conicido", nameContact: "Ricardo Orellana", mailContact: "orellana@ciat.com.mx", site: "http://www.ciat.mx/portal/index.php" },
-    { name: "Cluster2", address: "conicido", nameContact: "Ricardo Orellana", mailContact: "orellana@ciat.com.mx", site: "http://www.ciat.mx/portal/index.php" },
-    { name: "Cluster3", address: "conicido", nameContact: "Ricardo Orellana", mailContact: "orellana@ciat.com.mx", site: "http://www.ciat.mx/portal/index.php" },
-    { name: "ATI", address: "conicido", nameContact: "Ricardo Fernandez", mailContact: "ricardofer@tecnologiaintegrada.com.mx", site: "https://tecnologiaintegrada.com.mx/" },
-    { name: "ATI1", address: "conicido", nameContact: "Ricardo Fernandez", mailContact: "ricardofer@tecnologiaintegrada.com.mx", site: "https://tecnologiaintegrada.com.mx/" },
-    { name: "ATI2", address: "conicido", nameContact: "Ricardo Fernandez", mailContact: "ricardofer@tecnologiaintegrada.com.mx", site: "https://tecnologiaintegrada.com.mx/" }
+        createData('Refrigerador', "Grande :)", "No c", "Bueno, pero congela mucho", "1"),
+        createData('Estufa', "Estufa Grande con horno", "No c", "Saber, no la usamos", "2"),
+        createData('Estufa', "Estufa chica", "No c", "Buena", "3"),
+        createData('Tanque de gas', "Pequeño", "No tiene marca, creo", "Bueno", "4"),
+        createData('Literas', "Las mas chafas", "-_-", "una rota :(", "5"),
+        createData('Licuadora', "Vaso de vidrio", "No c", "Nueva", "6"),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -91,31 +80,31 @@ const headCells = [
         id: 'name',
         numeric: false,
         disablePadding: true,
-        label: 'Nombre',
+        label: 'Producto',
     },
     {
-        id: 'address',
+        id: 'description',
         numeric: true,
         disablePadding: false,
-        label: 'Dirección',
+        label: 'Descripción',
     },
     {
-        id: 'nameContact',
+        id: 'model',
         numeric: true,
         disablePadding: false,
-        label: 'Nombre de Contacto',
+        label: 'Modelo',
     },
     {
-        id: 'mailContact',
+        id: 'status',
         numeric: true,
         disablePadding: false,
-        label: 'Correo de contacto',
+        label: 'Estado',
     },
     {
-        id: 'site',
+        id: 'code',
         numeric: true,
         disablePadding: false,
-        label: 'Sitio web',
+        label: 'Codigo',
     },
 ];
 
@@ -171,8 +160,6 @@ QuickSearchToolbar.propTypes = {
     value: PropTypes.string.isRequired,
 };
 
-const tab = '\u00A0';
-
 function EnhancedTableHead(props) {
     const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
         props;
@@ -183,11 +170,10 @@ function EnhancedTableHead(props) {
     return (
         <TableHead>
             <TableRow>
-                {tab}
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.id}
-                        align={headCell.numeric ? 'right' : 'left'}
+                        align={headCell.numeric ? 'right' : 'center'}
                         padding={headCell.disablePadding ? 'none' : 'normal'}
                         sortDirection={orderBy === headCell.id ? order : false}
                         sx={{
@@ -222,7 +208,7 @@ EnhancedTableHead.propTypes = {
     rowCount: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable() {
+export default function InventarioScreen() {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('address');
     const [selected, setSelected] = React.useState([]);
@@ -264,32 +250,6 @@ export default function EnhancedTable() {
         setSelected([]);
     };
 
-    const handleClick = (event, name) => {
-        const selectedIndex = selected.indexOf(name);
-        let newSelected = [];
-        const limit = 1;
-
-        if (selected.length < limit) {
-            newSelected = newSelected.concat(selected, name);
-            console.log(name);
-        }
-
-        /*         if (selectedIndex === -1) {
-                    newSelected = newSelected.concat(selected, name);
-                } else if (selectedIndex === 0) {
-                    newSelected = newSelected.concat(selected.slice(1));
-                } else if (selectedIndex === selected.length - 1) {
-                    newSelected = newSelected.concat(selected.slice(0, -1));
-                } else if (selectedIndex > 0) {
-                    newSelected = newSelected.concat(
-                        selected.slice(0, selectedIndex),
-                        selected.slice(selectedIndex + 1),
-                    );
-                } */
-
-        setSelected(newSelected);
-    };
-
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -322,7 +282,7 @@ export default function EnhancedTable() {
                                 id="tableTitle"
                                 component="div"
                             >
-                                Empresas
+                                Inventario
                             </Typography>
                             <QuickSearchToolbar value={searchText}
                                 onChange={(event) => requestSearch(event.target.value)}
@@ -346,40 +306,14 @@ export default function EnhancedTable() {
                                     {rowsSearch.slice().sort(getComparator(order, orderBy))
                                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                         .map((row, index) => {
-                                            const isItemSelected = isSelected(row.name);
-                                            const labelId = `enhanced-table-checkbox-${index}`;
 
                                             return (
-                                                <TableRow
-                                                    hover
-                                                    onClick={(event) => handleClick(event, row.name)}
-                                                    role="checkbox"
-                                                    aria-checked={isItemSelected}
-                                                    tabIndex={-1}
-                                                    key={row.name}
-                                                    selected={isItemSelected}
-                                                >
-                                                    <TableCell padding="checkbox">
-                                                        <Checkbox
-                                                            color="primary"
-                                                            checked={isItemSelected}
-                                                            inputProps={{
-                                                                'aria-labelledby': labelId,
-                                                            }}
-                                                        />
-                                                    </TableCell>
-                                                    <TableCell
-                                                        component="th"
-                                                        id={labelId}
-                                                        scope="row"
-                                                        padding="none"
-                                                    >
-                                                        {row.name}
-                                                    </TableCell>
-                                                    <TableCell align="right">{row.address}</TableCell>
-                                                    <TableCell align="right">{row.nameContact}</TableCell>
-                                                    <TableCell align="right">{row.mailContact}</TableCell>
-                                                    <TableCell align="right">{row.site}</TableCell>
+                                                <TableRow>
+                                                    <TableCell align="left">{row.name}</TableCell>
+                                                    <TableCell align="right">{row.description}</TableCell>
+                                                    <TableCell align="right">{row.model}</TableCell>
+                                                    <TableCell align="right">{row.status}</TableCell>
+                                                    <TableCell align="right">{row.code}</TableCell>
                                                 </TableRow>
                                             );
                                         })}
