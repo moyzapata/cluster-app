@@ -11,6 +11,7 @@ import { RequireAuth } from "./login/LoginScreen";
 import Form from "./vacantes/Form";
 import FormBecarios from "./becarios/FormBecarios";
 import InventarioScreen from "./inventario/InventarioScreen";
+import { Account } from "./becarios/info";
 
 function App() {
     return (
@@ -40,6 +41,14 @@ function App() {
                                 element={
                                     <RequireAuth>
                                         <Pendientes />
+                                    </RequireAuth>
+                                }
+                            />
+                            <Route
+                                path="/profile"
+                                element={
+                                    <RequireAuth>
+                                        <Account />
                                     </RequireAuth>
                                 }
                             />

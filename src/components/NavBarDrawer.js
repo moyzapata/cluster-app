@@ -111,7 +111,7 @@ export const NavBarDrawer = () => {
     console.log(select);
     switch (select) {
       case 'Perfil':
-        return goToLogin();
+        return goToProfile();
       case 'Cuenta':
         return goToLogin();
       case 'Cerrar sesión':
@@ -129,6 +129,10 @@ export const NavBarDrawer = () => {
 
   function goToHome() {
     navigate("/")
+  };
+
+  function goToProfile() {
+    navigate("/profile")
   };
 
   const [anchorNt, setAnchorNt] = React.useState(null);
