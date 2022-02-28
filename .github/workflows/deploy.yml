@@ -17,8 +17,6 @@ jobs:
         node-version: ${{matrix.node-version}}
     - name: Install packages
       run: npm install
-    - name: Build page
-      run: npm run build
     - name: Install mui
       run: npm install @mui/material @emotion/react @emotion/styled
     - name: Install mui icons
@@ -27,6 +25,8 @@ jobs:
       run: npm install --save react-window
     - name: Install rrd6
       run: npm install react-router-dom@6
+    - name: Build page
+      run: npm run build
     - name: deploy the app
       uses: peaceiris/actions-gh-pages@v3
       with: 
