@@ -11,7 +11,7 @@ import { RequireAuth } from "./login/LoginScreen";
 import Form from "./vacantes/Form";
 import FormBecarios from "./becarios/FormBecarios";
 import InventarioScreen from "./inventario/InventarioScreen";
-import { Account } from "./becarios/info";
+import { Account } from "./becarios/InfoUser";
 
 function App() {
     return (
