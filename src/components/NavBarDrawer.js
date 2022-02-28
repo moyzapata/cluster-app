@@ -127,10 +127,6 @@ export const NavBarDrawer = () => {
     );
   };
 
-  function goToHome() {
-    navigate("/")
-  };
-
   function goToProfile() {
     navigate("/profile")
   };
