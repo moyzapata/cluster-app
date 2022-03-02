@@ -10,7 +10,7 @@ npm install @mui/icons-material \
 npm install --save react-window \
 npm install react-router-dom@6 \
 npm install @mui/x-data-grid \
-npm install @mui/x-data-grid-generator \
+npm install @mui/x-data-grid-generator
 ## Available Scripts
 
 In the project directory, you can run:
