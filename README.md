@@ -2,6 +2,15 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+### `Install components`
+
+npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/icons-material
+npm install --save react-window
+npm install react-router-dom@6
+npm install @mui/x-data-grid
+npm install @mui/x-data-grid-generator
 ## Available Scripts
 
 In the project directory, you can run:
