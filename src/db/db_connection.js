@@ -4,7 +4,7 @@ var con = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "cluster-app"
+    database: "clusters"
 })
 
 con.connect(function (err) {
