@@ -25,6 +25,8 @@ jobs:
       run: npm install --save react-window
     - name: Install rrd6
       run: npm install react-router-dom@6
+    - name: Install mysql
+      run: npm install mysql
     - name: Build page
       run: CI=false npm run build
     - name: deploy the app
