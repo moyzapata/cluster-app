@@ -18,6 +18,7 @@ import {
   Navigate,
 } from 'react-router-dom';
 import { fakeAuthProvider } from '../../core/Auth';
+import { login } from '../../db/db_connection';
 
 function Copyright(props) {
   return (
@@ -95,6 +96,7 @@ export const LoginScreen = () => {
     auth.signin(email, () => {
       navigate(from, { replace: true });
     });
+    login(data.get("email"), data.get("password"))
   };
 
   return (
