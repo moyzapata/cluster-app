@@ -18,7 +18,7 @@ con.connect(function (err) {
     });
 });
 
-export function login(mail, pass) {
+/* export function login(mail, pass) {
 	const { username, password } = { mail , pass }
 	const values = [username, password]
     con.query("SELECT * FROM administradores WHERE correo = ? AND password = ?", values, (err, result) => {
@@ -35,6 +35,6 @@ export function login(mail, pass) {
         }
     })
     con.end()
-}
+} */
 
 module.exports = con;
