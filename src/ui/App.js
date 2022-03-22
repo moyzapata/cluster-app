@@ -22,11 +22,11 @@ function App() {
                         <Route path="/login" element={<LoginScreen />} />
                         <Route path="/register" element={<SignUp />} />
                         <Route path="/elijeEmpresa" element={<EmpresasList />} />
-                        <Route path="*" element={<NotFound />} />
                         <Route path="/solicitud" element={<Form />} />
                         <Route path="/formBecarios" element={<FormBecarios />} />
                         <Route element={<NavBarDrawer />}>
                             <Route path="/" element={<HomeScreen />} />
+                            <Route path="*" element={<NotFound />} />
                             <Route path="/empresas" element={<EmpresaScreen />} />
                             <Route
                                 path="/inventario"

@@ -9,11 +9,11 @@ var con = mysql.createConnection({
 
 con.connect(function (err) {
     if (err) throw err;
-    con.query("SELECT * from administradores", function (err, result, fields) {
+    con.query("INSERT INTO empresas (nombre, direccion, nombre_contacto, telefono_contacto, email_contacto) VALUES ('ati', 'conocido', 'ricardo', '1234567890', 'ricargo@gmail.com')", function (err, result, fields) {
         if (!err) {
             console.log(result);
         } else {
-            console.log("Error while performing Query.");
+            console.log("Error while performing Query. " + err);
         }
     });
 });
