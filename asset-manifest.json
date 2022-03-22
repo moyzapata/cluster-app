@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/moyzapata/cluster-app/static/css/main.e6c13ad2.css",
-    "main.js": "/moyzapata/cluster-app/static/js/main.0baba8d6.js",
+    "main.js": "/moyzapata/cluster-app/static/js/main.b9a344eb.js",
     "static/js/787.1d1121a6.chunk.js": "/moyzapata/cluster-app/static/js/787.1d1121a6.chunk.js",
-    "static/media/nps.png": "/moyzapata/cluster-app/static/media/nps.c351d685ecde1d5d5c00.png",
     "static/media/logoclus.png": "/moyzapata/cluster-app/static/media/logoclus.0d86a045a4e9fdfa014e.png",
+    "static/media/chems.png": "/moyzapata/cluster-app/static/media/chems.f57eca8fcc92340e19e0.png",
     "index.html": "/moyzapata/cluster-app/index.html",
     "main.e6c13ad2.css.map": "/moyzapata/cluster-app/static/css/main.e6c13ad2.css.map",
-    "main.0baba8d6.js.map": "/moyzapata/cluster-app/static/js/main.0baba8d6.js.map",
+    "main.b9a344eb.js.map": "/moyzapata/cluster-app/static/js/main.b9a344eb.js.map",
     "787.1d1121a6.chunk.js.map": "/moyzapata/cluster-app/static/js/787.1d1121a6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.0baba8d6.js"
+    "static/js/main.b9a344eb.js"
   ]
 }
