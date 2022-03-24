@@ -16,8 +16,17 @@ import CircularProgress from '@mui/material/CircularProgress';
 import {
     useNavigate,
 } from 'react-router-dom';
+import { enablePromise, openDatabase, SQLiteDatabase } from 'react-native-sqlite-storage';
 
 const theme = createTheme();
+
+export const createTable = async (db: SQLiteDatabase) => {
+    const query = `CREATE TABLE IF NOT EXISTS vacantes(
+          value TEXT NOT NULL
+      );`;
+
+    await db.executeSql(query);
+};
 
 export default function Form() {
     let navigate = useNavigate();
