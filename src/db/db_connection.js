@@ -1,5 +1,1 @@
-import { openDatabase } from 'react-native-sqlite-storage';
-
-export const getDBConnection = async () => {
-    return openDatabase({ name: 'todo-data.db', location: 'default' });
-};
+import { enablePromise, openDatabase, SQLite } from 'react-native-sqlite-storage';
